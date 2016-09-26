@@ -42,24 +42,24 @@ for infile in glob.glob("*.png"):
         	
             # Determine the current dimensions of the image
             old_width, old_height = new_image.size
-    
-        	# Center the image
-        	x1 = int(math.floor((canvas_width - old_width) / 2))
-        	y1 = int(math.floor((canvas_height - old_height) / 2))
-    
-            # Checks the image type and codes the new_background as transparent in all modes
-        	mode = new_image.mode
-        	if len(mode) == 1:  # L, 1
-            		new_background = (0)
-        	if len(mode) == 3:  # RGB
-            		new_background = (0,0,0)
-        	if len(mode) == 4:  # RGBA, CMYK
-            		new_background = (0,0,0,0)
             
+            # Center the image
+            x1 = int(math.floor((canvas_width - old_width) / 2))
+            y1 = int(math.floor((canvas_height - old_height) / 2))
+            
+            # Checks the image type and codes the new_background as transparent in all modes
+            mode = new_image.mode
+            if len(mode) == 1:  # L, 1
+                new_background = (0)
+            if len(mode) == 3:  # RGB
+                new_background = (0,0,0)
+            if len(mode) == 4:  # RGBA, CMYK
+                new_background = (0,0,0,0)
+
             # Centers the image on the new canvas and saves the new file to the new folder
-        	newImage = Image.new(mode, (canvas_width, canvas_height), new_background)
-        	newImage.paste(new_image, (x1, y1, x1 + old_width, y1 + old_height))
-        	newImage.save(os.getcwd() + "/" + extension + "/" + file + "_" + extension + ".png", "PNG")
+            newImage = Image.new(mode, (canvas_width, canvas_height), new_background)
+            newImage.paste(new_image, (x1, y1, x1 + old_width, y1 + old_height))
+            newImage.save(os.getcwd() + "/" + extension + "/" + file + "_" + extension + ".png", "PNG")
 
     	resize_canvas(canvas_width, canvas_height)
     image_resize(max_image_size, canvas_width, canvas_height, extension) 
